@@ -157,25 +157,24 @@
                 <input type="hidden" name= "id_pays" value = " <?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?> " >
                 <input type="hidden" name= "id_ville" value = " <?php echo isset($_GET['idCity']) ? $_GET['idCity'] : ''; ?> " >
                 <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
-                <input type="text" value="<?php if (isset($_GET['id'])) {
+                <input type="text" value="<?php if (isset($_GET['idCity'])) {
                     echo "$nom";
                 }?>" id="nom" name="nom" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
             </div>
             <div>
                 <label for="urlVille" class="block text-sm font-medium text-gray-700">URL Ville</label>
-                <input type="url" value="<?php if (isset($_GET['id'])) {
+                <input type="url" value="<?php if (isset($_GET['idCity'])) {
                     echo "$urlVille";
                 }?>" id="urlVille" name="urlVille" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
             </div>
             <div>
                 <select name="type" id="" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-                    
-                                <option value="<?php if (isset($_GET['id'])) {
-                    echo "$type";
-                }?>" ></option>;
-                            
-                    
-                    
+                        <option value="" >ville_rurale</option>;
+                        <option value="">ville_industrielle</option>
+                        <option value="">station_balnéaire</option>
+                        <option value="">ville_historique</option>
+                        <option value="">ville_importante</option>
+                        <option value="">capitale</option>
                 </select>
             </div>
             <div class="flex justify-end space-x-2">

@@ -84,7 +84,6 @@ include 'connexion.php';
                 <a href='' class='flex gap-4 px-4 py-2 rounded-2xl'><img src='img/3 User.svg' alt=''> Continent </a>
                 <a href='' class='flex gap-4 px-4 py-2 rounded-2xl'><img id='btn-icon' class='mt-1' src='img/act.svg' alt=''> Pays</a>
             
-               
                 <a href="" class="flex gap-4 px-4 py-2 rounded-2xl"><img src="img/Settings_Future.svg" alt=""> Ville </a>
             </div>
         </div>
@@ -118,7 +117,6 @@ include 'connexion.php';
                 <h1> Pays</h1>
 
             <div class="flex gap-4">
-                   
                     <button id="add-etd" onclick=" document.getElementById('modal').classList.remove('hidden')" class="animate__pulse flex gap-2 items-center bg-[#4790cd] px-4 py-2 rounded-lg text-white ">
                         <img src="img/_Avatar add button.svg " alt="">Ajouter Pays
                     </button>
