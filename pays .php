@@ -107,6 +107,57 @@ include 'connexion.php';
     
             </nav>
         </header>
+        <section class="p-4">
+        <div class="flex justify-between items-center px-8">
+                <h1> Pays</h1>
+
+            <div class="flex gap-4">
+                   
+                    <button id="add-etd" onclick=" document.getElementById('modal').classList.remove('hidden')" class="animate__pulse flex gap-2 items-center bg-[#4790cd] px-4 py-2 rounded-lg text-white ">
+                        <img src="img/_Avatar add button.svg " alt="">Ajouter Pays
+                    </button>
+            </div>
+            </div> 
+        <div class="container mx-auto mt-10 px-4">
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    ?>
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <img class="w-full h-40 object-cover" src="<?php echo $row['urlImage']; ?>" alt="Image de <?php echo $row['nomPays']; ?>">
+                        <div class="p-4">
+                            <h5 class="text-xl font-semibold mb-2 text-gray-800"><?php echo $row['nomPays']; ?></h5>
+                            <p class="text-gray-600 mb-1">Continent : <?php echo $row['nomContinent']; ?></p>
+                            <p class="text-gray-600 mb-1">Langues : <?php echo $row['langues']; ?></p>
+                            <div class="flex justify-between">
+                            <p class="text-gray-600">Population : <?php echo $row['population']; ?></p>
+                            <div class="flex gap-2">
+                            <button 
+                                onclick="
+                                    
+                                    window.location.href = 'pays.php?id=<?= $row['id_pays']; ?>';
+                                ">
+                                <img class="w-4 h-4 cursor-pointer" src="img/editinggh.png" alt="">
+                            </button>
+                                    
+                            
+                                <a href="delete.php?id=<?php echo $row['id_pays']; ?>">
+                                    <img class="w-4 h-4 cursor-pointer" src="img/delete.png" alt="">
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p class='text-center text-gray-700'>Aucun continent trouvé.</p>";
+            }
+            ?>
+        </div>
+        </div>
+    </section>
     </div>
 </div>
 </body>
