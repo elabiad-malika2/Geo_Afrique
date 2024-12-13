@@ -1,30 +1,9 @@
-<?php 
-include 'connexion.php';
-
-    $data = "SELECT p.nom as nomPays, langues, population ,urlImage , c.nom as nomContinent,p.id_pays from pays p,continent c where p.id_continent = c.id_continent ";
-    $continet = "SELECT * FROM continent.continent";
-
-    $continentName= $conn->query($continet);
-    $result = $conn->query($data);
-
-    if (isset($_GET['id'])) {
-        $id=$_GET['id'];
-        $sql="SELECT p.nom as nomPays, langues, population ,urlImage , c.nom as nomContinent,p.id_pays from pays p,continent c where p.id_continent = c.id_continent and id_pays=$id ";
-        $q = $conn->query($sql);
-        $ligne= $q->fetch_assoc();
-        $nomPays = $ligne['nomPays'];
-        $population = $ligne['population'];
-        $langues = $ligne['langues'];
-        $nomContinent = $ligne['nomContinent'];
-        $urlImage = $ligne['urlImage'];
-    }
-    
-    
-    
-
-
+<?php
+    include 'connexion.php';
+    $id=$_GET['id'];
+    $data = "SELECT * from ville where id_pays=$id ";
+    $ville =  $conn->query($data);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +13,6 @@ include 'connexion.php';
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style >
- 
         input[type="search"]::-webkit-search-cancel-button
         {
         -webkit-appearance:none;
@@ -83,8 +61,6 @@ include 'connexion.php';
             
                 <a href='' class='flex gap-4 px-4 py-2 rounded-2xl'><img src='img/3 User.svg' alt=''> Continent </a>
                 <a href='' class='flex gap-4 px-4 py-2 rounded-2xl'><img id='btn-icon' class='mt-1' src='img/act.svg' alt=''> Pays</a>
-            
-               
                 <a href="" class="flex gap-4 px-4 py-2 rounded-2xl"><img src="img/Settings_Future.svg" alt=""> Ville </a>
             </div>
         </div>
@@ -118,42 +94,38 @@ include 'connexion.php';
                 <h1> Pays</h1>
 
             <div class="flex gap-4">
-                   
                     <button id="add-etd" onclick=" document.getElementById('modal').classList.remove('hidden')" class="animate__pulse flex gap-2 items-center bg-[#4790cd] px-4 py-2 rounded-lg text-white ">
-                        <img src="img/_Avatar add button.svg " alt="">Ajouter Pays
+                        <img src="img/_Avatar add button.svg " alt="">Ajouter Ville
                     </button>
             </div>
             </div> 
         <div class="container mx-auto mt-10 px-4">
         <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+            if ($ville->num_rows > 0) {
+                while ($row = $ville->fetch_assoc()) {
                     ?>
                     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                        <img class="w-full h-40 object-cover" src="<?php echo $row['urlImage']; ?>" alt="Image de <?php echo $row['nomPays']; ?>">
+                        <img class="w-full h-40 object-cover" src="<?php echo $row['urlVille']; ?>" alt="Image de <?php echo $row['nom']; ?>">
                         <div class="p-4">
-                            <h5 class="text-xl font-semibold mb-2 text-gray-800"><?php echo $row['nomPays']; ?></h5>
-                            <p class="text-gray-600 mb-1">Continent : <?php echo $row['nomContinent']; ?></p>
-                            <p class="text-gray-600 mb-1">Langues : <?php echo $row['langues']; ?></p>
+                            <h5 class="text-xl font-semibold mb-2 text-gray-800"><?php echo $row['nom']; ?></h5>
+                            <p class="text-gray-600 mb-1">Type : <?php echo $row['type']; ?></p>
                             <div class="flex justify-between">
-                            <p class="text-gray-600">Population : <?php echo $row['population']; ?></p>
-                            <div class="flex gap-2 items-center justify-center">
-                            <button 
-                                onclick="
+                                <div class="flex gap-2 items-center justify-center">
+                                    <button 
+                                        onclick="
+                                            
+                                            window.location.href = 'Payss.php?id=<?= $row['id_pays']; ?>';
+                                        ">
+                                        <img class="w-4 h-4 cursor-pointer" src="img/editinggh.png" alt="">
+                                    </button>
+                                            
                                     
-                                    window.location.href = 'Payss.php?id=<?= $row['id_pays']; ?>';
-                                ">
-                                <img class="w-4 h-4 cursor-pointer" src="img/editinggh.png" alt="">
-                            </button>
-                                    
-                            
-                            <a href="delete.php?id=<?php echo $row['id_pays']; ?>">
-                                    <img class="w-4 h-4 cursor-pointer" src="img/delete.png" alt="">
-                            </a>
-                            <a href="ville.php?id=<?php echo $row['id_pays']; ?>">Show</a>
+                                    <a href="delete.php?id=<?php echo $row['id_pays']; ?>">
+                                            <img class="w-4 h-4 cursor-pointer" src="img/delete.png" alt="">
+                                    </a>
                             </div>
-                            </div>
+                        </div>
                         </div>
                     </div>
                     <?php
