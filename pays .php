@@ -19,13 +19,18 @@ include 'connexion.php';
         $urlImage = $ligne['urlImage'];
     }
     
+    
+    
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geo-Afrique</title>
+    <title>Clients</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style >
@@ -68,7 +73,7 @@ include 'connexion.php';
 </head>
 <body>
 <div class="flex min-h-screen h-full ">
-<aside class="w-52 border-r min-h-full  flex flex-col items-center gap-4 ">
+    <aside class="w-52 border-r min-h-full  flex flex-col items-center gap-4 ">
         <div class=" drop-shadow-xl">
             <img src="img/africa.png" alt="">
         </div>
@@ -85,7 +90,7 @@ include 'connexion.php';
         </div>
     </aside>
     <div class="grow">
-    <header class=" h-20 border-b">
+        <header class=" h-20 border-b">
             <nav class=" h-full flex justify-between mx-8 items-center">
                 <div class="flex gap-2">
                     <img src="img/Search.svg" alt="">
@@ -107,7 +112,8 @@ include 'connexion.php';
     
             </nav>
         </header>
-        <section class="p-4">
+        
+    <section class="p-4">
         <div class="flex justify-between items-center px-8">
                 <h1> Pays</h1>
 
@@ -158,7 +164,6 @@ include 'connexion.php';
         </div>
         </div>
     </section>
-    </div>
     <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white w-full max-w-lg p-6 rounded-md shadow-lg space-y-4">
         <h2 class="text-xl font-semibold text-gray-700">Ajouter un pays</h2>
@@ -219,5 +224,17 @@ include 'connexion.php';
         </form>
     </div>
 </div>
+
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
+
+if (id) {
+document.getElementById('modal').classList.remove('hidden');
+}
+
+</script>
+
 </body>
 </html>
