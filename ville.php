@@ -149,7 +149,7 @@
     <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white w-full max-w-lg p-6 rounded-md shadow-lg space-y-4">
         <h2 class="text-xl font-semibold text-gray-700">Ajouter un pays</h2>
-        <form action="ajouterP.php?<?php if (isset($_GET['id'])) {
+        <form action="ajouterV.php?id=<?= $id ?>&<?php if (isset($_GET['id'])) {
             echo "id=Update";
         }
         ?>" method="POST" class="space-y-4">
