@@ -100,7 +100,7 @@
         
     <section class="p-4">
         <div class="flex justify-between items-center px-8">
-                <h1> Pays</h1>
+                <h1> ville</h1>
 
             <div class="flex gap-4">
                     <button id="add-etd" onclick=" document.getElementById('modal').classList.remove('hidden')" class="animate__pulse flex gap-2 items-center bg-[#4790cd] px-4 py-2 rounded-lg text-white ">
