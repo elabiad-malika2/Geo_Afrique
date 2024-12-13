@@ -9,7 +9,7 @@
         $idP=$_POST['id'];
         $sql="UPDATE pays set nom='$nomP', population='$populationP', langues='$languesP', urlImage='$urlImageP', id_continent='$continentP' where id_pays = '$idP' ";
         $conn->query($sql);
-        header("Location: pays.php");
+        header("Location: Payss.php");
     }else{ 
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])) {
         $nom = $_POST["nom"];
@@ -23,7 +23,7 @@
 
         $conn->query($data);
 
-        header("Location: pays.php");
+        header("Location: Payss.php");
 
     }
     }

@@ -142,7 +142,7 @@ include 'connexion.php';
                             <button 
                                 onclick="
                                     
-                                    window.location.href = 'pays.php?id=<?= $row['id_pays']; ?>';
+                                    window.location.href = 'Payss.php?id=<?= $row['id_pays']; ?>';
                                 ">
                                 <img class="w-4 h-4 cursor-pointer" src="img/editinggh.png" alt="">
                             </button>

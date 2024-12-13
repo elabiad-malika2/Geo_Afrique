@@ -6,6 +6,6 @@
     $delted = " delete from pays where id_pays = $id ";
     $conn->query($delted);
 
-    header("Location: pays.php");
+    header("Location: Payss.php");
 
 ?>
