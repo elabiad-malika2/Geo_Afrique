@@ -3,6 +3,15 @@
     $id=$_GET['id'];
     $data = "SELECT * from ville where id_pays=$id ";
     $ville =  $conn->query($data);
+    if (isset($_GET['idCity'])) {
+        $identifient=$_GET["idCity"];
+        $sql="SELECT nom , type, urlVille , id_ville from ville where id_ville = $identifient";
+        $q = $conn->query($sql);
+        $ligne= $q->fetch_assoc();
+        $nom = $ligne['nom'];
+        $type = $ligne['type'];
+        $urlVille = $ligne['urlVille'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,20 +119,20 @@
                         <div class="p-4">
                             <h5 class="text-xl font-semibold mb-2 text-gray-800"><?php echo $row['nom']; ?></h5>
                             <p class="text-gray-600 mb-1">Type : <?php echo $row['type']; ?></p>
-                            <div class="flex justify-between">
-                                <div class="flex gap-2 items-center justify-center">
-                                    <button 
-                                        onclick="
-                                            
-                                            window.location.href = 'Payss.php?id=<?= $row['id_pays']; ?>';
-                                        ">
-                                        <img class="w-4 h-4 cursor-pointer" src="img/editinggh.png" alt="">
-                                    </button>
-                                            
+                            <div class="flex justify-end">
+                            <div class="flex gap-2 items-center justify-center">
+                            <button 
+                                onclick="
+                                    window.location.href = 'ville.php?id=<?= $row['id_pays'] ?>&idCity=<?= $row['id_ville'] ?>';
+
+                                ">
+                                <img class="w-4 h-4 cursor-pointer" src="img/editinggh.png" alt="">
+                            </button>
                                     
-                                    <a href="delete.php?id=<?php echo $row['id_pays']; ?>">
-                                            <img class="w-4 h-4 cursor-pointer" src="img/delete.png" alt="">
-                                    </a>
+                            
+                            <a href="deleteV.php?id=<?= $row['id_pays'] ?>&idCity=<?= $row['id_ville'] ?>">
+                                    <img class="w-4 h-4 cursor-pointer" src="img/delete.png" alt="">
+                            </a>
                             </div>
                         </div>
                         </div>
@@ -145,40 +154,27 @@
         }
         ?>" method="POST" class="space-y-4">
             <div>
-                <input type="hidden" name= "id" value = " <?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?> " >
+                <input type="hidden" name= "id_pays" value = " <?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?> " >
+                <input type="hidden" name= "id_ville" value = " <?php echo isset($_GET['idCity']) ? $_GET['idCity'] : ''; ?> " >
                 <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
                 <input type="text" value="<?php if (isset($_GET['id'])) {
-                    echo "$nomPays";
+                    echo "$nom";
                 }?>" id="nom" name="nom" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
             </div>
             <div>
-                <label for="population" class="block text-sm font-medium text-gray-700">Population</label>
-                <input type="number" value="<?php if (isset($_GET['id'])) {
-                    echo "$population";
-                }?>" id="population" name="population" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-            </div>
-            <div>
-                <label for="urlImage" class="block text-sm font-medium text-gray-700">URL Image</label>
+                <label for="urlVille" class="block text-sm font-medium text-gray-700">URL Ville</label>
                 <input type="url" value="<?php if (isset($_GET['id'])) {
-                    echo "$urlImage";
-                }?>" id="urlImage" name="urlImage" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                    echo "$urlVille";
+                }?>" id="urlVille" name="urlVille" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
             </div>
             <div>
-                <label for="langues" class="block text-sm font-medium text-gray-700">Langues</label>
-                <input type="text" value="<?php if (isset($_GET['id'])) {
-                    echo "$langues";
-                }?>" id="langues" name="langues" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-            </div>
-            <div>
-                <select name="continent" id="" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-                    <?php
-                        if ($continentName->num_rows > 0) {
-                            while($conN=$continentName->fetch_assoc()){
-                                echo "<option value='".$conN['id_continent']."'>".$conN['nom']."</option>";
-                            }
-
-                        }
-                    ?>
+                <select name="type" id="" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                    
+                                <option value="<?php if (isset($_GET['id'])) {
+                    echo "$type";
+                }?>" ></option>;
+                            
+                    
                     
                 </select>
             </div>
@@ -186,7 +182,7 @@
                 <button type="button" onclick=" document.getElementById('modal').classList.add('hidden');" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600">Annuler</button>
                 <button type="submit" name="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
                 <?php
-                            if (isset($_GET['id'])) {
+                            if (isset($_GET['idCity'])) {
                                 echo "Modifer";
                             }else {
                                 echo "Ajouter";
@@ -201,7 +197,7 @@
 
 <script>
 const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
+const id = urlParams.get('idCity');
 
 if (id) {
 document.getElementById('modal').classList.remove('hidden');
