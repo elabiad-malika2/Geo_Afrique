@@ -159,6 +159,65 @@ include 'connexion.php';
         </div>
     </section>
     </div>
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        <div class="bg-white w-full max-w-lg p-6 rounded-md shadow-lg space-y-4">
+        <h2 class="text-xl font-semibold text-gray-700">Ajouter un pays</h2>
+        <form action="ajouterP.php?<?php if (isset($_GET['id'])) {
+            echo "id=Update";
+        }
+        ?>" method="POST" class="space-y-4">
+            <div>
+                <input type="hidden" name= "id" value = " <?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?> " >
+                <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
+                <input type="text" value="<?php if (isset($_GET['id'])) {
+                    echo "$nomPays";
+                }?>" id="nom" name="nom" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+            </div>
+            <div>
+                <label for="population" class="block text-sm font-medium text-gray-700">Population</label>
+                <input type="number" value="<?php if (isset($_GET['id'])) {
+                    echo "$population";
+                }?>" id="population" name="population" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+            </div>
+            <div>
+                <label for="urlImage" class="block text-sm font-medium text-gray-700">URL Image</label>
+                <input type="url" value="<?php if (isset($_GET['id'])) {
+                    echo "$urlImage";
+                }?>" id="urlImage" name="urlImage" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+            </div>
+            <div>
+                <label for="langues" class="block text-sm font-medium text-gray-700">Langues</label>
+                <input type="text" value="<?php if (isset($_GET['id'])) {
+                    echo "$langues";
+                }?>" id="langues" name="langues" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+            </div>
+            <div>
+                <select name="continent" id="" class="mt-1 block w-full border border-gray-300 rounded-md p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                    <?php
+                        if ($continentName->num_rows > 0) {
+                            while($conN=$continentName->fetch_assoc()){
+                                echo "<option value='".$conN['id_continent']."'>".$conN['nom']."</option>";
+                            }
+
+                        }
+                    ?>
+                    
+                </select>
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button type="button" onclick=" document.getElementById('modal').classList.add('hidden');" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600">Annuler</button>
+                <button type="submit" name="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                <?php
+                            if (isset($_GET['id'])) {
+                                echo "Modifer";
+                            }else {
+                                echo "Ajouter";
+                            }
+                        ?>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
