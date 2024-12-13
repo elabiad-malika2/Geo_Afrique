@@ -67,6 +67,23 @@ include 'connexion.php';
     </script>
 </head>
 <body>
-    
+<div class="flex min-h-screen h-full ">
+<aside class="w-52 border-r min-h-full  flex flex-col items-center gap-4 ">
+        <div class=" drop-shadow-xl">
+            <img src="img/africa.png" alt="">
+        </div>
+        <div class="">
+            <div class="grid gap-4 w-[100%]">
+                <a href="" class="flex gap-4 px-4 py-2 rounded-2xl"><img src="img/home.svg" alt=""> Dashboard </a>
+            
+                <a href='' class='flex gap-4 px-4 py-2 rounded-2xl'><img src='img/3 User.svg' alt=''> Continent </a>
+                <a href='' class='flex gap-4 px-4 py-2 rounded-2xl'><img id='btn-icon' class='mt-1' src='img/act.svg' alt=''> Pays</a>
+            
+               
+                <a href="" class="flex gap-4 px-4 py-2 rounded-2xl"><img src="img/Settings_Future.svg" alt=""> Ville </a>
+            </div>
+        </div>
+    </aside>
+</div>
 </body>
 </html>
